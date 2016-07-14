@@ -2,6 +2,7 @@ package br.com.mauker.blecm.fragments;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 
 import br.com.mauker.blecm.R;
+import br.com.mauker.blecm.ServerService;
 import br.com.mauker.blecm.adapters.DeviceAdapter;
 import br.com.mauker.blecm.events.BluetoothServiceEvent;
 
@@ -40,12 +42,14 @@ public class ServerFragment extends Fragment {
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
+        mContext.startService(new Intent(mContext, ServerService.class));
     }
 
     @Override
     public void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
+        mContext.stopService(new Intent(mContext,ServerService.class));
     }
 
     @Override
