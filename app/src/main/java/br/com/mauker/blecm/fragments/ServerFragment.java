@@ -21,7 +21,10 @@ import br.com.mauker.blecm.ServerService;
 import br.com.mauker.blecm.adapters.DeviceAdapter;
 import br.com.mauker.blecm.events.BluetoothServiceEvent;
 
-
+/**
+ * Fragmento responsável por exibir os dispositivos que solicitaram dados desse dispositivo.
+ * (Clientes requisitando informações do lado servidor dessa aplicação)
+ */
 public class ServerFragment extends Fragment {
 
     private ListView lv_devices;
@@ -67,6 +70,11 @@ public class ServerFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Método responsável por receber os eventos gerados pelo serviço background.
+     * @param event Evento gerado pelo serviço background, podendo ser um cliente conectando-se ao
+     *              servidor, ou desconectando-se.
+     */
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void handleBluetoothServiceEvent(BluetoothServiceEvent event) {
         switch (event.eventType) {

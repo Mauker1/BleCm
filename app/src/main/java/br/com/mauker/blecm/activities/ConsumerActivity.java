@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothProfile;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -21,12 +22,21 @@ public class ConsumerActivity extends AppCompatActivity {
 
     private BluetoothGatt mBluetoothGatt;
 
+    private TextView tv_header;
+
+    private TextView tv_body;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumer);
 
+        tv_header = (TextView) findViewById(R.id.tv_header);
+        tv_body = (TextView) findViewById(R.id.tv_body);
+
         BluetoothDevice bd = getIntent().getParcelableExtra("device");
+
+        tv_header.setText("Dispositivo " + bd.getName() + "\n" + bd.getAddress());
 
         mBluetoothGatt = bd.connectGatt(getApplicationContext(),false,mGattCallback);
     }
@@ -38,6 +48,16 @@ public class ConsumerActivity extends AppCompatActivity {
             return;
         }
         mBluetoothGatt.close();
+    }
+
+    private void updateTextView(final String text) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tv_body.setText(text);
+            }
+        });
+
     }
 
     // Various callback methods defined by the BLE API.
@@ -76,6 +96,7 @@ public class ConsumerActivity extends AppCompatActivity {
                                 for (BluetoothGattCharacteristic c : characteristics) {
                                     Log.d(LOG_TAG,"Wohoo!");
                                     Log.d(LOG_TAG,c.getUuid().toString());
+//                                    Log.d(LOG_TAG,"Value: " + ServicesProfile.unsignedIntFromBytes(c.getValue()));
                                     gatt.readCharacteristic(c);
                                 }
 //                                gatt.readCharacteristic(service.getCharacteristic(ServicesProfile.CHARACTERISTIC_TEMPERATURE_UUID));
@@ -100,7 +121,9 @@ public class ConsumerActivity extends AppCompatActivity {
                     Log.d(LOG_TAG,"UUID: " + characteristic.getUuid());
                     if (status == BluetoothGatt.GATT_SUCCESS) {
                         if (ServicesProfile.CHARACTERISTIC_TEMPERATURE_UUID.equals(characteristic.getUuid())) {
-                            Log.i(LOG_TAG,"Temperature: " + ServicesProfile.unsignedIntFromBytes(characteristic.getValue()));
+                            int temp = ServicesProfile.unsignedIntFromBytes(characteristic.getValue());
+                            Log.i(LOG_TAG,"Temperature: " + temp);
+                            updateTextView("Temperatura: " + temp + " C");
                         }
                         if (ServicesProfile.CHARACTERISTIC_HUMIDITY_UUID.equals(characteristic.getUuid())) {
                             Log.i(LOG_TAG,"Humidity: " + ServicesProfile.unsignedIntFromBytes(characteristic.getValue()));

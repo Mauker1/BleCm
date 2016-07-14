@@ -29,6 +29,9 @@ import br.com.mauker.blecm.R;
 import br.com.mauker.blecm.activities.ConsumerActivity;
 import br.com.mauker.blecm.adapters.DeviceAdapter;
 
+/**
+ * Fragmento responsável por exibir os resultados de scan realizados pelo adaptador Bluetooth.
+ */
 public class ScanFragment extends Fragment {
 
     private static final int SCAN_PERIOD = 20 * 1000;
