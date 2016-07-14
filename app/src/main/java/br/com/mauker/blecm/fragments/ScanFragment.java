@@ -75,9 +75,11 @@ public class ScanFragment extends Fragment {
 
                 Toast.makeText(mContext,device.getName(),Toast.LENGTH_SHORT).show();
 
-                // TODO - passar o treco pra tela.
+                Intent it = new Intent(mContext, ConsumerActivity.class);
 
-                mContext.startActivity(new Intent(mContext, ConsumerActivity.class));
+                it.putExtra("device",device);
+
+                mContext.startActivity(it);
             }
         });
 
