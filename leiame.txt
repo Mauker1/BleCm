@@ -1,0 +1,14 @@
+Integrantes:
+Daniel Moraes
+Dilson José
+Mauricio Pessoa
+
+Informações de compilação: Importar o projeto no android studio, com SDK target 24.
+
+Execução do programa:
+
+
+Bugs Conhecidos:
+- A aplicação para de funcionar se o bluetooth não estiver ativo;
+- Não foi possível efetuar a leitura de todas as caracteristicas de um serviço;
+- Não conseguimos disponibilizar uma opção de parada do servidor;
