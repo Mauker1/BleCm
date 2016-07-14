@@ -25,8 +25,11 @@ public class DeviceAdapter extends BaseAdapter {
     }
 
     public void addDevice(@NonNull BluetoothDevice device) {
-        items.add(device);
-        notifyDataSetChanged();
+        if (!items.contains(device)) {
+            items.add(device);
+            notifyDataSetChanged();
+        }
+
     }
 
     public void removeDevice(@NonNull BluetoothDevice device) {
