@@ -28,14 +28,17 @@
         <activity
             android:name=".activities.ConsumerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.mauker.blecm.MainActivity" />
+            </activity>
 
         <service
             android:name=".ServerService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activities.DeviceActivity"></activity>
     </application>
 
 </manifest>

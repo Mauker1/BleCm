@@ -14,18 +14,18 @@ import java.util.UUID;
 import br.com.mauker.blecm.utils.RandomUtils;
 import br.com.mauker.blecm.utils.UuidUtils;
 
-class ServicesProfile {
+public class ServicesProfile {
     /* Unique ids are randomly chosen. */
 
     // Services UUID to expose our characteristics
-    public static UUID SERVICE_WEATHER_UUID = UuidUtils.uuidFromShortCode32("FAFAFAFA");
-    public static UUID SERVICE_TIME_UUID = UuidUtils.uuidFromShortCode32("FBFBFBFB");
+    public static UUID SERVICE_WEATHER_UUID = UuidUtils.uuidFromShortCode32("00001802");
+    public static UUID SERVICE_TIME_UUID = UuidUtils.uuidFromShortCode32("00001808");
 
     // Read-only characteristic providing number of elapsed seconds since offset
-    public static UUID CHARACTERISTIC_TEMPERATURE_UUID = UuidUtils.uuidFromShortCode32("E0E00000");
-    public static UUID CHARACTERISTIC_HUMIDITY_UUID = UuidUtils.uuidFromShortCode32("E0E10000");
+    public static UUID CHARACTERISTIC_TEMPERATURE_UUID = UuidUtils.uuidFromShortCode32("00002903");
+    public static UUID CHARACTERISTIC_HUMIDITY_UUID = UuidUtils.uuidFromShortCode32("00002904");
 
-    public static UUID CHARACTERISTIC_MILLIS_UUID = UuidUtils.uuidFromShortCode32("E0E20000");
+    public static UUID CHARACTERISTIC_MILLIS_UUID = UuidUtils.uuidFromShortCode32("00002905");
 
     public static String getStateDescription(int state) {
         switch (state) {

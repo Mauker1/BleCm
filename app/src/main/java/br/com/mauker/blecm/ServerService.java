@@ -83,18 +83,18 @@ public class ServerService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.v(TAG, "in onDestroy");
+        if (mGattServer == null) return;
+
+        mGattServer.close();
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
 
     private void initialize(){
-
-
         mConnectedDevices = new ArrayList<>();
         //mConnectedDevicesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mConnectedDevices);
 
         mBluetoothManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
-
 
         if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             //Bluetooth is disabled
@@ -157,6 +157,7 @@ public class ServerService extends Service {
                         //Read-only characteristic, supports notifications
                         BluetoothGattCharacteristic.PROPERTY_READ | BluetoothGattCharacteristic.PROPERTY_NOTIFY,
                         BluetoothGattCharacteristic.PERMISSION_READ);
+
 
         Log.d(TAG,"Add: " + service.addCharacteristic(temperatureCharacteristic));
         Log.d(TAG,"Add: " + service.addCharacteristic(humidityCharacteristic));
