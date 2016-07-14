@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by mauke on 13/07/2016.
+ * Created by mauker on 13/07/2016.
  */
 public class DeviceAdapter extends BaseAdapter {
 
@@ -71,7 +71,7 @@ public class DeviceAdapter extends BaseAdapter {
 
         BluetoothDevice device = items.get(i);
 
-        viewHolder.tv_name.setText(device.getAddress());
+        viewHolder.tv_name.setText(device.getName() + " - " +  device.getAddress());
 
         return convertView;
     }

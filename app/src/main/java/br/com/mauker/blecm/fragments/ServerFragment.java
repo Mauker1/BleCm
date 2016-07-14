@@ -25,6 +25,8 @@ public class ServerFragment extends Fragment {
     private ListView lv_devices;
     private DeviceAdapter adapter;
 
+    private Context mContext;
+
     public ServerFragment() {
         // Required empty public constructor
     }
@@ -51,6 +53,8 @@ public class ServerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_server, container, false);
+
+        mContext = rootView.getContext();
 
         lv_devices = (ListView) rootView.findViewById(R.id.fragment_server_ll_clients);
         adapter = new DeviceAdapter(rootView.getContext(),new ArrayList<BluetoothDevice>());
